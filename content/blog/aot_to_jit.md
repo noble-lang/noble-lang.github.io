@@ -1,13 +1,23 @@
 ---
+<<<<<<< HEAD
 title: "Why isn't Vanadium AOT?"
+=======
+title: "Why isn't Noble AOT?"
+>>>>>>> ea9e60e (add all new files)
 show: true
 layout: post
 last_edited: 2025-06-09
 ---
 
+<<<<<<< HEAD
 Vanadium is mentioned as a systems language, has a `comptime` keyword, but even like that it isn't ahead-of-time compiled.
 
 That's because Vanadium is actually just-in-time (a.k.a *JIT*) compiled.
+=======
+Noble is mentioned as a systems language, has a `comptime` keyword, but even like that it isn't ahead-of-time compiled.
+
+That's because Noble is actually just-in-time (a.k.a *JIT*) compiled.
+>>>>>>> ea9e60e (add all new files)
 
 ## What is JIT compilation?
 If in AOT (ahead-of-time) compilation the code is compiled before running it (e.g. when using C++, you first compile the code into a binary and then run it), then JIT is the opposite, compilation happens **WHEN THE PROGRAM IS RUNNING**.
@@ -15,7 +25,11 @@ If in AOT (ahead-of-time) compilation the code is compiled before running it (e.
 This means that for this program:
 
 File `config.vn`:
+<<<<<<< HEAD
 ```vanadium
+=======
+```noble
+>>>>>>> ea9e60e (add all new files)
 from "std/IO" include println;
 
 struct Field {
@@ -48,7 +62,11 @@ static let global_config = new Config([new Field("name")]);
 ```
 
 File: `main.vn`
+<<<<<<< HEAD
 ```vanadium
+=======
+```noble
+>>>>>>> ea9e60e (add all new files)
 from "config" include global_config;
 
 static func main() {
@@ -76,12 +94,17 @@ And all of this at runtime.
 We can go deeper and say that JIT is slower as you parse, compile and then run it, that you lose the bytecode once the program ends **BUT** you can make a binary packing both the bytecode and VM, that compilation here can be also called codegen (=code generation) because you normally just make bytcode and not direct binary, and much more, but at the core, JIT is just AOT but it does everything at runtime.
 
 ## Why not use AOT?
+<<<<<<< HEAD
 AOT might seem better and more fitting in Vanadium, but for AOT there is a very big problem: **THE TARGET**.
+=======
+AOT might seem better and more fitting in Noble, but for AOT there is a very big problem: **THE TARGET**.
+>>>>>>> ea9e60e (add all new files)
 
 When you compile code for AOT you can't just use in-memory numbers, you need to find something static, so you need a target.
 
 Most languages compile to an [IR (intermediate representation)](https://en.wikipedia.org/wiki/Intermediate_representation), which is then compiled to binary. The most famous option for this would be LLVM, where you first generate LLVM IR, and LLVM compiles it to binary.
 
+<<<<<<< HEAD
 So, why doesn't Vanadium use AOT compilation? Because I didn't find a target that fitted. 
 
 LLVM is a heavy dependency, and control over the runtime is very low, which means that to make LLVM really work for Vanadium I need to either modify it or strap a lot of important things from my concept of Vanadium.
@@ -89,6 +112,15 @@ LLVM is a heavy dependency, and control over the runtime is very low, which mean
 I could also compile to Assembly, but to make that cross-platform is a pain, or to some binary format directly, but that is too complex, or even [transpile](https://en.wikipedia.org/wiki/Source-to-source_compiler) (basically compile to another standalone language) to C or similar, but that means users need a C compiler and that I have to hand off runtime to C!
 
 So the best option is to make my very own format using just in-memory unsigned integers fed to my own stack-based VM. If you want a static binary, you can build a simple VM wrapper that reads from `stdin` and pack it into a binary where direct bytecode is fed into the VM through `stdin`, or use another method for JIT static compilation. The thing is, Vanadium isn't getting AOT, [*or is it?*](https://youtu.be/KF8wlNegMas).
+=======
+So, why doesn't Noble use AOT compilation? Because I didn't find a target that fitted. 
+
+LLVM is a heavy dependency, and control over the runtime is very low, which means that to make LLVM really work for Noble I need to either modify it or strap a lot of important things from my concept of Noble.
+
+I could also compile to Assembly, but to make that cross-platform is a pain, or to some binary format directly, but that is too complex, or even [transpile](https://en.wikipedia.org/wiki/Source-to-source_compiler) (basically compile to another standalone language) to C or similar, but that means users need a C compiler and that I have to hand off runtime to C!
+
+So the best option is to make my very own format using just in-memory unsigned integers fed to my own stack-based VM. If you want a static binary, you can build a simple VM wrapper that reads from `stdin` and pack it into a binary where direct bytecode is fed into the VM through `stdin`, or use another method for JIT static compilation. The thing is, Noble isn't getting AOT, [*or is it?*](https://youtu.be/KF8wlNegMas).
+>>>>>>> ea9e60e (add all new files)
 
 ## But, isn't it slow?
 You could think that JIT compilation is slow, and in some cases *slower* than interpretation, but it's actually very fast.
@@ -100,7 +132,11 @@ I mean, think about it, what's faster:
 You might think that the extra overhead of compiling at runtime costs more than directly walking and evaluating the tree, but it's actually not just pretty fast, but also compensates a lot with the fact that the VM will be working with plain, compact and defined bytecode.
 
 If you aren't still convinced, then let's say I want to run this:
+<<<<<<< HEAD
 ```vanadium
+=======
+```noble
+>>>>>>> ea9e60e (add all new files)
 static func main() {
     let x = 2 + 3 * 5;
 }
