@@ -1,9 +1,10 @@
 :root {
-  --bg-color: #212121;
-  --alt-bg: #3a3a3a;
+  --bg-color: #3a3a3a;
+  --alt-bg: #212121;
   --fg-color: #f4f4f4;
   --accent-color: #056ca2;
-  --link-color: #0d5883;
+  --link-color: #70bbe6;
+
   --code-bg: #3a3a3a;
   --code-fg: #f4f4f4;
   --sidebar-bg: #282828;
@@ -36,6 +37,7 @@ a {
   color: var(--link-color);
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -43,16 +45,19 @@ a:hover {
 header {
   margin-bottom: 2rem;
 }
+
 header h1 a {
   font-size: 2rem;
   color: var(--fg-color);
   text-decoration: none;
 }
+
 nav a {
   margin-right: 1rem;
   font-weight: bold;
   color: var(--fg-color);
 }
+
 nav a:hover {
   color: var(--accent-color);
 }
@@ -68,17 +73,20 @@ nav.sidebar {
   top: 0;
   left: 0;
 }
+
 nav.sidebar ul {
   list-style-type: none;
   padding-left: 1rem;
 }
+
 nav.sidebar li {
   margin-bottom: 0.5rem;
 }
 
 .hero {
-  background: url("../images/sample.png") no-repeat left center;
-  background-size: cover;
+  /* background: url("../images/sample.png") no-repeat left center; */
+  /* background-size: cover; */
+  background-color: var(--accent-color);
   height: 25%;
   margin: 0 calc(-50vw + 50%);
   width: 100vw;
@@ -109,18 +117,21 @@ nav.sidebar li {
 main {
   padding-bottom: 4rem;
 }
+
 main h1,
 main h2,
 main h3 {
   margin-top: 2rem;
   color: var(--fg-color);
 }
+
 main code {
   background: var(--code-bg);
   color: var(--code-fg);
   padding: 0.2rem 0.4rem;
   border-radius: 8px;
 }
+
 pre code {
   display: block;
   padding: 1rem;

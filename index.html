@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Vanadium</title>
+    <title>Noble</title>
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -13,10 +17,11 @@
 />
 
   </head>
+
   <body>
     <section class="hero">
       <header>
-        <h1><a href="/">Vanadium</a></h1>
+        <h1><a href="/">Noble</a></h1>
         <nav>
   <a href="/docs/">Docs</a>
   <a href="/spec/">Spec</a>
@@ -25,175 +30,138 @@
 </nav>
 
       </header>
-      <h2>The language that just works</h2>
-      <p>Vanadium is a lightweight high-level systems language designed for clarity, safety, and reliability. Designed to replace the pain C++ is.</p>
+      <h2>Don't focus on debugging, focus on ideas.</h2>
+      <p>Noble is a Java-like high-level language designed for ease of use, clarity, transparency. It aims to have much lower overhead than Java.</p>
     </section>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
-    />
-    <main><p>Vanadium is a robust systems-level programming language built with expressiveness, safety and strictness in mind. It combines systems-level features, like manual memory management or bit-sized integers, with high-level features, like lambdas or a file-based module system.</p>
-<p>Vanadium is often thought of as the safer, more expressive version of C++.</p>
-<p>Some of its core features are:</p>
-<ul>
-<li>C interoperability</li>
-<li>Blocks as expressions</li>
-<li>Strong typing and weak casts</li>
-<li>Low overhead <em>(if you don’t mess up a lot)</em></li>
-<li>JIT-compilation</li>
-<li>Clean error handling</li>
-<li>Intuitive module system</li>
-<li>Simple iterators <small><em>(yes, <a href="https://preview.redd.it/just-do-for-loops-why-do-you-gotta-complicate-things-so-much-v0-ha3h3fd7a4ue1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=64d0a896b143714a2db035a598a232462707238b">that exists</a>)</em></small></li>
-<li>Sealed classes</li>
-<li>Lambdas</li>
-</ul>
-<h3>Hello, World!</h3>
-<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+    <main><p>Noble is a high-level Java-like language, designed with transparency and clarity in mind.</p>
+<p>The language aims to minimize overhead by ensuring that a program without any imports includes only what the programmer explicitly declares. Noble avoids having exposed “magic” methods, and the only thing you can find in a program with no imports is what you declared.</p>
+<p>Right now, in the early phases, it is planned to be garbage-collected, but an ownership-based or generally better system will be tried at later phases.</p>
+<h2>vs. Java</h2>
+<hr>
+<p>This is a simple Java program that greets you using command line arguments:</p>
+<pre class="language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Greet</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello, "</span> <span class="token operator">+</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">"!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>And this is the same program in noble:</p>
+<pre class="language-noble"><code class="language-noble">module main
 
-static func main() {
-    println("Hello, World!");
+import noble/system
+import noble/console
+
+function main() {
+  if system.argv.len > 1 {
+    console.print("Hello, " system.argv[1] + "!") # Note that the first arg in argv (argv[0]) is always the command used to run the program
+  } else {
+    console.print("Hello, World!")
+  }
+}</code></pre>
+<h2>Examples</h2>
+<hr>
+<h3>Hello, World!</h3>
+<pre class="language-noble"><code class="language-noble">module main
+
+import noble/console
+
+function main() {
+  console.print("Hello, World!")
 }</code></pre>
 <h3>More examples:</h3>
 <details> 
 <summary><strong>Iterate over an array</strong></summary>
-<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+<pre class="language-noble"><code class="language-noble">module main
 
-static func main() {
-    let names = ["Jhon", "Tom", "Angela", "Luca"];
-    for name in names {
-        println("Hello, " + name + "!");
-    }
-}</code></pre>
-</details>
-<details> 
-<summary><strong>Unsafe usage</strong></summary>
-<pre class="language-vanadium"><code class="language-vanadium">static func main() {
-    let long_int: long = 0xFFFFF;
+import noble/console
 
-    @@ Unsafe narrowing cast
-    let long_as_short: short = unsafe { long_int as short };
-
-    unsafe {
-        let to_float: float = long_int as float;
-        discard long_to_short(long_int);
-    };
-
-    @* Compile error
-    discard long_to_short(long_int); 
-    *@
-}
-
-unsafe func long_to_short(n: long): short {
-    return n as short;
+function main() {
+  var names = ["John", "Tom", "Angela", "David"]
+  for var name in names {
+    console.print("Hello, " + name + "!")
+  }
 }</code></pre>
 </details>
 <details> 
 <summary><strong>Error handling</strong></summary>
-<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
-from "std/err" include Exception;
+<pre class="language-noble"><code class="language-noble">module main
 
-func div(a: int, b: int): !int {
-    return a / b unless b == 0 ifso throw new Exception("Can't divide by zero");
+import noble/console
+import noble/except/Exception
+import noble/process
+
+function div(a: int, b: int): int {
+  if b == 0 or a == 0 {
+    throw Exception.new("Can't divide by 0")
+  }
+  return a / b
 }
 
-static func main() {
-    let result = try div(5, 0) catch {|err|
-        println("Error: " + err);
-        return;
-    };
-    println("Result: " + result);
+function main() {
+  var result = try div(5, 0) catch (err: Exception) {
+    console.print("Error: " + err.as_string())
+    process.exit(1)
+  }
+  console.print("Result: " + result)
 }</code></pre>
 </details>
 <details> 
 <summary><strong>Create a Vector2 class</strong></summary>
-<pre class="language-vanadium"><code class="language-vanadium">class Vector2 {
-    public x: float,
-    public y: float,
+<pre class="language-noble"><code class="language-noble">module main
 
-    static func new(self: &Vector2, x: float, y: float) {
-        self.x = x;
-        self.y = y;
-    }
+class Vector2 {
+  public var x: float,
+  public var y: float,
+
+  function new(x: float, y: float) {
+    this.x = x
+    this.y = y
+  }
 }
 
-static func main() {
-    let my_vec = new Vector2(0.6, 4.7);
+function main() {
+  var vec = Vector2.new(0.6, 4.7)
 }</code></pre>
 </details>
 <details> 
-<summary><strong>Import another file</strong></summary>
-<p>File <code>math.vn</code>:</p>
-<pre class="language-vanadium"><code class="language-vanadium">export static func add(a: int, b: int): int {
-    a + b
+<summary><strong>Declare and use another module</strong></summary>
+<p>File <code>math.nb</code>:</p>
+<pre class="language-noble"><code class="language-noble">module math
+
+public function add(a: int, b: int): int {
+    return a + b
 }
 
-export static func sub(a: int, b: int): int {
-    a - b
+public function sub(a: int, b: int): int {
+    return a - b
 }</code></pre>
-<p>File <code>main.vn</code>:</p>
-<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
-include "math";
-from "math" include sub;
+<p>File <code>main.nb</code>:</p>
+<pre class="language-noble"><code class="language-noble">module main
 
-static func main() {
-    println(math.add(5, 5));
-    println(sub(6, 3));
-}</code></pre>
-</details>
-<details> 
-<summary><strong>Use static variables</strong></summary>
-<p>File <code>config.vn</code>:</p>
-<pre class="language-vanadium"><code class="language-vanadium">struct Config {
-    public secrets: {string}string = {};
-}
+import math
+import math/sub
+import noble/console
 
-export static conf = new Config;</code></pre>
-<p>File <code>secrets.vn</code>:</p>
-<pre class="language-vanadium"><code class="language-vanadium">include "config";
-
-export static func init_secrets() {
-    config.conf.secrets["PASSW"] = "passivationisthebest123";
-}</code></pre>
-<p>File <code>main.vn</code>:</p>
-<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
-include "config";
-include "secrets";
-
-static func main() {
-    secrets.init_secrets();
-    println(config.conf.secrets);
+function main() {
+    console.print(math.add(5, 5))
+    console.print(sub(6, 3))
 }</code></pre>
 </details>
 <details>
 <summary><strong>Make an assert function</strong></summary>
-<pre class="language-vanadium"><code class="language-vanadium">from "std/err" include Exception;
+<pre class="language-noble"><code class="language-noble">module assert
 
-static func assert(condition: bool, message: string?) {
-    throw new Exception(message ifnot "Assertion failed!") unless condition;
-}</code></pre>
-</details>
-<details>
-<summary><strong>Allocate, reference and free memory</strong></summary>
-<pre class="language-vanadium"><code class="language-vanadium">static func main() {
-    @@ Manually allocated array
-    let arr = new [4]ulong;
-    assert(arr[2] == 0);
-    arr[2] = 0xFFFFF;
-    defer delete arr;
+import noble/exception/Exception
 
-    let num = 7;
-    let ptr = &amp;num; @@ Referencing
-    defer delete ptr;
-
-    *ptr = 5; @@ Dereferencing
-    assert(num == 5);
-}
-
-@@ Ignore this!
-from "std/err" include Exception;
-static func assert(condition: bool, message: string?)  {
-    throw new Exception(message ifnot "Assertion failed!") unless condition;
+function assert(condition: bool, message: string?) {
+  if not condition {
+    throw Exception.new(message ifnot "Assertion failed!")
+  }
+>>>>>>> ea9e60e (add all new files)
 }</code></pre>
 </details>
 <p><a href="/docs/">Get started</a></p>
@@ -202,11 +170,15 @@ static func assert(condition: bool, message: string?)  {
     <footer>
       <p>
         © 2025
-        <a href="https://github.com/vn-language/">The Vanadium Team</a>
+        <a href="https://github.com/noble-lang/">The Noble Team</a>
       </p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
-    <script src="/assets/js/vanadium-prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-java.min.js"></script>
+    <script src="/assets/js/noble-prism.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => Prism.highlightAll());
+    </script>
   </body>
 </html>
