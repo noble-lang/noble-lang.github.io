@@ -178,7 +178,6 @@ function assert(condition: bool, message: string?) {
   if not condition {
     throw Exception.new(message ifnot "Assertion failed!")
   }
->>>>>>> ea9e60e (add all new files)
 }
 ```
 
