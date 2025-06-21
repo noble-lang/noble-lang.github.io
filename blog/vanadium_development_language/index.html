@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The three rewrites Vanadium went through - Vanadium Blog</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+
+  </head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
+    />
+    <header>
+      <h1><a href="/">Vanadium</a></h1>
+      <nav>
+  <a href="/docs/">Docs</a>
+  <a href="/spec/">Spec</a>
+  <a href="/ref/">Standard Library</a>
+  <a href="/blog/">Blog</a>
+</nav>
+
+    </header>
+
+    <main class="post">
+      <article>
+        <h2>The three rewrites Vanadium went through</h2>
+        <p class="post-date">June 21, 2025</p>
+        <p>If you take a peek at Vanadium’s commit history, you will see two interesting commits:</p>
+<ul>
+<li><a href="https://github.com/vn-language/vanadium/commit/54fb61d2f2d20fdca91932f70c0293f367fbcfab">54fb61d</a>: <code>feat: effing RWR (Rewrite it In Rust)</code></li>
+<li><a href="https://github.com/vn-language/vanadium/commit/d8e6af745b36b00909f0c1efb400fa95839c5c05">d8e6af7</a>: <code>feat: rewrite in C++ (I PROMISE IT'S THE FINAL REWRITE!)</code></li>
+</ul>
+<p>And this is because Vanadium has changed development language two times.</p>
+<h2>Zig</h2>
+<p>It was first going to be made in Zig, but I realized that I was going too slow and the code was too messy, refactoring was too hard at that moment, so I decided to archive the version and try to make it in Rust.</p>
+<p>What I had for that version:</p>
+<ul>
+<li>A full <a href="https://en.wikipedia.org/wiki/Lexical_analysis">lexer</a>.</li>
+<li>Already started doing the <a href="https://en.wikipedia.org/wiki/Parsing">parser</a>.</li>
+</ul>
+<h2>Rust</h2>
+<p>When I noticed Zig wouldn’t work, I changed to Rust.</p>
+<p>I chose Rust because it’s a very robust language, it has very good tooling, and it’s overall a very good option. Then I noticed that I don’t know anything about Rust, I thought it was going to be easy coming from C++, but it seems that it didn’t really work at the end. I was messing around with types, trying to understand all the weird errors, until I just admitted that Rust wasn’t going to work.</p>
+<h2>C++</h2>
+<p>If Zig didn’t work because it became too complex very fast, and Rust didn’t work because it has a very steep learning curve and I couldn’t start coding in it by developing a language then I needed to go for something familiar, something that I already knew how to use, so I chose C++.</p>
+<p>Vanadium is now being developed in C++, and it will remain like that until…</p>
+<h2>Self-hosting?</h2>
+<p>In the future, I will probably try <a href="https://en.wikipedia.org/wiki/Self-hosting_(compilers)">self-hosting</a>. Self-hosting basically consists of:</p>
+<ul>
+<li>Writing a stage-one compiler in C++ (already on it).</li>
+<li>Writing a stage-two compiler in Vanadium to act as main compiler.</li>
+<li>Compile the stage-two compiler with the stage-one (or <em>bootstrap</em>) compiler.</li>
+<li>Distribute the compiled stage-two.</li>
+</ul>
+<p>This allows for me to first go through the pain of making Vanadium in C++, then adding new features in Vanadium, which is less painful, and also allows for rewriting all the logic already made in C++ in Vanadium so it can be refined.</p>
+<p>The inspiration for making Vanadium self-hosted in the future was <a href="https://github.com/ziglang/zig">Zig</a>. Zig has a <strong>97.6% of Zig code</strong> in it’s <strong>source code</strong>, the current stage-one compiler it’s only <strong>2.1% of the source code</strong>. Other languages that did this (and far sooner than Zig) are:</p>
+<ul>
+<li>C, originally written in Assembly.</li>
+<li>Rust, originally written in OCaml.</li>
+</ul>
+
+      </article>
+    </main>
+
+    <footer>
+      <p>Back to <a href="/blog/">all posts</a></p>
+      <p>
+        © 2025
+        <a href="https://github.com/vn-language/">The Vanadium Team</a>
+      </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="/assets/js/vanadium-prism.js"></script>
+  </body>
+</html>

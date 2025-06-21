@@ -2,9 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ title }} - Vanadium Spec</title>
+    <title>Vanadium Documentation - Vanadium Docs</title>
     <link rel="stylesheet" href="/assets/css/style.css" />
-    {% include "fonts.html" %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+
   </head>
   <body>
     <link
@@ -13,29 +19,32 @@
     />
     <header>
       <h1><a href="/">Vanadium</a></h1>
-      {% include "menu.html" %}
+      <nav>
+  <a href="/docs/">Docs</a>
+  <a href="/spec/">Spec</a>
+  <a href="/ref/">Standard Library</a>
+  <a href="/blog/">Blog</a>
+</nav>
+
     </header>
 
     <main>
-      <h2>{{ title }}</h2>
-      {{ content | safe }}
+      <h2>Vanadium Documentation</h2>
+      <p>Welcome to the Vanadium Documentation.</p>
+<p>Start learning the language, explore features, and understand the system architecture.</p>
+
     </main>
 
     <nav class="sidebar">
       <ul>
-        {% for sectionName in collections.spec_sections %}
+        
         <li>
-          <h3 class="doc-section-header">{{ sectionName }}</h3>
+          <h3 class="doc-section-header">Typing</h3>
           <ul>
-            {% for page in collections.spec %} {% if page.data.parent ==
-            sectionName and page.data.show %}
-            <li style="padding-left: 10px">
-              <a href="{{ page.url }}">{{ page.data.title }}</a>
-            </li>
-            {% endif %} {% endfor %}
+              
           </ul>
         </li>
-        {% endfor %}
+        
       </ul>
     </nav>
 

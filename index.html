@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vanadium</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
+/>
+
+  </head>
+  <body>
+    <section class="hero">
+      <header>
+        <h1><a href="/">Vanadium</a></h1>
+        <nav>
+  <a href="/docs/">Docs</a>
+  <a href="/spec/">Spec</a>
+  <a href="/ref/">Standard Library</a>
+  <a href="/blog/">Blog</a>
+</nav>
+
+      </header>
+      <h2>The language that just works</h2>
+      <p>Vanadium is a lightweight high-level systems language designed for clarity, safety, and reliability. Designed to replace the pain C++ is.</p>
+    </section>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
+    />
+    <main><p>Vanadium is a robust systems-level programming language built with expressiveness, safety and strictness in mind. It combines systems-level features, like manual memory management or bit-sized integers, with high-level features, like lambdas or a file-based module system.</p>
+<p>Vanadium is often thought of as the safer, more expressive version of C++.</p>
+<p>Some of its core features are:</p>
+<ul>
+<li>C interoperability</li>
+<li>Blocks as expressions</li>
+<li>Strong typing and weak casts</li>
+<li>Low overhead <em>(if you don’t mess up a lot)</em></li>
+<li>JIT-compilation</li>
+<li>Clean error handling</li>
+<li>Intuitive module system</li>
+<li>Simple iterators <small><em>(yes, <a href="https://preview.redd.it/just-do-for-loops-why-do-you-gotta-complicate-things-so-much-v0-ha3h3fd7a4ue1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=64d0a896b143714a2db035a598a232462707238b">that exists</a>)</em></small></li>
+<li>Sealed classes</li>
+<li>Lambdas</li>
+</ul>
+<h3>Hello, World!</h3>
+<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+
+static func main() {
+    println("Hello, World!");
+}</code></pre>
+<h3>More examples:</h3>
+<details> 
+<summary><strong>Iterate over an array</strong></summary>
+<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+
+static func main() {
+    let names = ["Jhon", "Tom", "Angela", "Luca"];
+    for name in names {
+        println("Hello, " + name + "!");
+    }
+}</code></pre>
+</details>
+<details> 
+<summary><strong>Unsafe usage</strong></summary>
+<pre class="language-vanadium"><code class="language-vanadium">static func main() {
+    let long_int: long = 0xFFFFF;
+
+    @@ Unsafe narrowing cast
+    let long_as_short: short = unsafe { long_int as short };
+
+    unsafe {
+        let to_float: float = long_int as float;
+        discard long_to_short(long_int);
+    };
+
+    @* Compile error
+    discard long_to_short(long_int); 
+    *@
+}
+
+unsafe func long_to_short(n: long): short {
+    return n as short;
+}</code></pre>
+</details>
+<details> 
+<summary><strong>Error handling</strong></summary>
+<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+from "std/err" include Exception;
+
+func div(a: int, b: int): !int {
+    return a / b unless b == 0 ifso throw new Exception("Can't divide by zero");
+}
+
+static func main() {
+    let result = try div(5, 0) catch {|err|
+        println("Error: " + err);
+        return;
+    };
+    println("Result: " + result);
+}</code></pre>
+</details>
+<details> 
+<summary><strong>Create a Vector2 class</strong></summary>
+<pre class="language-vanadium"><code class="language-vanadium">class Vector2 {
+    public x: float,
+    public y: float,
+
+    static func new(self: &Vector2, x: float, y: float) {
+        self.x = x;
+        self.y = y;
+    }
+}
+
+static func main() {
+    let my_vec = new Vector2(0.6, 4.7);
+}</code></pre>
+</details>
+<details> 
+<summary><strong>Import another file</strong></summary>
+<p>File <code>math.vn</code>:</p>
+<pre class="language-vanadium"><code class="language-vanadium">export static func add(a: int, b: int): int {
+    a + b
+}
+
+export static func sub(a: int, b: int): int {
+    a - b
+}</code></pre>
+<p>File <code>main.vn</code>:</p>
+<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+include "math";
+from "math" include sub;
+
+static func main() {
+    println(math.add(5, 5));
+    println(sub(6, 3));
+}</code></pre>
+</details>
+<details> 
+<summary><strong>Use static variables</strong></summary>
+<p>File <code>config.vn</code>:</p>
+<pre class="language-vanadium"><code class="language-vanadium">struct Config {
+    public secrets: {string}string = {};
+}
+
+export static conf = new Config;</code></pre>
+<p>File <code>secrets.vn</code>:</p>
+<pre class="language-vanadium"><code class="language-vanadium">include "config";
+
+export static func init_secrets() {
+    config.conf.secrets["PASSW"] = "passivationisthebest123";
+}</code></pre>
+<p>File <code>main.vn</code>:</p>
+<pre class="language-vanadium"><code class="language-vanadium">from "std/IO" include println;
+include "config";
+include "secrets";
+
+static func main() {
+    secrets.init_secrets();
+    println(config.conf.secrets);
+}</code></pre>
+</details>
+<details>
+<summary><strong>Make an assert function</strong></summary>
+<pre class="language-vanadium"><code class="language-vanadium">from "std/err" include Exception;
+
+static func assert(condition: bool, message: string?) {
+    throw new Exception(message ifnot "Assertion failed!") unless condition;
+}</code></pre>
+</details>
+<details>
+<summary><strong>Allocate, reference and free memory</strong></summary>
+<pre class="language-vanadium"><code class="language-vanadium">static func main() {
+    @@ Manually allocated array
+    let arr = new [4]ulong;
+    assert(arr[2] == 0);
+    arr[2] = 0xFFFFF;
+    defer delete arr;
+
+    let num = 7;
+    let ptr = &amp;num; @@ Referencing
+    defer delete ptr;
+
+    *ptr = 5; @@ Dereferencing
+    assert(num == 5);
+}
+
+@@ Ignore this!
+from "std/err" include Exception;
+static func assert(condition: bool, message: string?)  {
+    throw new Exception(message ifnot "Assertion failed!") unless condition;
+}</code></pre>
+</details>
+<p><a href="/docs/">Get started</a></p>
+</main>
+
+    <footer>
+      <p>
+        © 2025
+        <a href="https://github.com/vn-language/">The Vanadium Team</a>
+      </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="/assets/js/vanadium-prism.js"></script>
+  </body>
+</html>
