@@ -1,0 +1,150 @@
+:root {
+  --bg-color: #212121;
+  --alt-bg: #3a3a3a;
+  --fg-color: #f4f4f4;
+  --accent-color: #056ca2;
+  --link-color: #0d5883;
+  --code-bg: #3a3a3a;
+  --code-fg: #f4f4f4;
+  --sidebar-bg: #282828;
+}
+
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  line-height: 1.6;
+  font-size: 1rem;
+  max-width: 75vw;
+  margin: auto;
+  top: 0;
+  padding: 0 2rem 2rem 2rem;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+header h1 a {
+  font-size: 2rem;
+  color: var(--fg-color);
+  text-decoration: none;
+}
+nav a {
+  margin-right: 1rem;
+  font-weight: bold;
+  color: var(--fg-color);
+}
+nav a:hover {
+  color: var(--accent-color);
+}
+
+nav.sidebar {
+  width: 225px;
+  background: var(--sidebar-bg);
+  color: var(--fg-color);
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+nav.sidebar ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+nav.sidebar li {
+  margin-bottom: 0.5rem;
+}
+
+.hero {
+  background: url("../images/sample.png") no-repeat left center;
+  background-size: cover;
+  height: 25%;
+  margin: 0 calc(-50vw + 50%);
+  width: 100vw;
+  color: var(--fg-color);
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(51, 51, 51, 0.4);
+  z-index: -1;
+}
+
+.hero h2 {
+  margin-top: 0;
+  text-decoration: underline;
+  font-size: 2rem;
+}
+
+main {
+  padding-bottom: 4rem;
+}
+main h1,
+main h2,
+main h3 {
+  margin-top: 2rem;
+  color: var(--fg-color);
+}
+main code {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 8px;
+}
+pre code {
+  display: block;
+  padding: 1rem;
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+footer {
+  border-top: 1px solid #555;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-bottom: 1rem;
+}
+
+.doc-section-header {
+  color: #bbb;
+}

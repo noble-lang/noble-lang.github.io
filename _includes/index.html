@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
+    {% include "fonts.html" %}
+  </head>
+  <body>
+    <section class="hero">
+      <header>
+        <h1><a href="/">Vanadium</a></h1>
+        {% include "menu.html" %}
+      </header>
+      <h2>The language that just works</h2>
+      <p>{{ vanadium_desc }}</p>
+    </section>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
+    />
+    <main>{{ content | safe }}</main>
+
+    <footer>
+      <p>
+        © {{ year }}
+        <a href="https://github.com/vn-language/">The Vanadium Team</a>
+      </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="/assets/js/vanadium-prism.js"></script>
+  </body>
+</html>

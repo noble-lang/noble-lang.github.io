@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }} - Vanadium Spec</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    {% include "fonts.html" %}
+  </head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"
+    />
+    <header>
+      <h1><a href="/">Vanadium</a></h1>
+      {% include "menu.html" %}
+    </header>
+
+    <main class="doc">
+      <h2>{{ title }}</h2>
+      {{ content | safe }}
+    </main>
+
+    <nav class="sidebar">
+      <ul>
+        {% for sectionName in collections.spec_sections %}
+        <li>
+          <h3 class="doc-section-header">{{ sectionName }}</h3>
+          <ul>
+            {% for page in collections.spec %} {% if page.data.parent ==
+            sectionName and page.data.show %}
+            <li style="padding-left: 10px">
+              <a href="{{ page.url }}">{{ page.data.title }}</a>
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <footer>
+      <p>Back to <a href="/spec/">all spec</a></p>
+      <p>Spec page last update: {{ page.date | readableDate }}</p>
+      <p>
+        &copy; 2025
+        <a href="https://github.com/vn-language">The Vanadium Team</a>
+      </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="/assets/js/vanadium-prism.js"></script>
+  </body>
+</html>
