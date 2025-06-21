@@ -1,13 +1,8 @@
 {
-<<<<<<< HEAD
-  "name": "vanadium-website",
-  "version": "1.0.0",
-  "description": "Vanadium's website",
-=======
+
   "name": "noble-website",
   "version": "1.0.0",
   "description": "Noble's website",
->>>>>>> ea9e60e (add all new files)
   "main": "index.js",
   "scripts": {
     "start": "eleventy --serve",
@@ -15,25 +10,15 @@
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
-    "url": "git+https://github.com/vn-language/vn-language.github.io.git"
-=======
     "url": "git+https://github.com/noble-lang/noble-lang.github.io.git"
->>>>>>> ea9e60e (add all new files)
   },
   "keywords": [],
   "author": "Nykenik24",
   "license": "ISC",
   "bugs": {
-<<<<<<< HEAD
-    "url": "https://github.com/vn-language/vn-language.github.io/issues"
-  },
-  "homepage": "https://github.com/vn-language/vn-language.github.io#readme",
-=======
     "url": "https://github.com/noble-lang/noble-lang.github.io/issues"
   },
   "homepage": "https://github.com/noble-lang/noble-lang.github.io#readme",
->>>>>>> ea9e60e (add all new files)
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "prismjs": "^1.30.0"
