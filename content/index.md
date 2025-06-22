@@ -172,7 +172,7 @@ function main() {
 ```noble
 module assert
 
-import noble/exception/Exception
+import noble/except/Exception
 
 function assert(condition: bool, message: string?) {
   if not condition {
