@@ -63,7 +63,7 @@ nav a:hover {
 }
 
 nav.sidebar {
-  width: 225px;
+  width: 12%;
   background: var(--sidebar-bg);
   color: var(--fg-color);
   height: 100vh;
